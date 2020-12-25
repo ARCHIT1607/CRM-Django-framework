@@ -1,14 +1,26 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import *
 # Create your views here.
 
 
 def home(request):
-    return render(request, 'accounts/dashboard.html')
+    order = Order.objects.all()
+    customer = Customer.objects.all()
+
+    total_customers = customer.count()
+    total_orders = order.count()
+    delivered = order.filter(status="Delivered").count()
+    pending = order.filter(status="Pending").count()
+
+    context = {'orders': order, 'customers': customer, 'total_customers': total_customers, 'total_orders': total_orders, 'delivered': delivered,
+               'pending': pending}
+    return render(request, 'accounts/dashboard.html', context)
 
 
 def products(request):
-    return render(request, 'accounts/products.html')
+    product = Product.objects.all()
+    return render(request, 'accounts/products.html', {'products': product})
 
 
 def customer(request):
