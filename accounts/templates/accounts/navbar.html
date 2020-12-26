@@ -1,4 +1,13 @@
 {% load static %}
+
+<style>
+  #hello-msg{
+    font-size: 18px;
+    color:#fff;
+    margin-right: 22px;
+    text-transform: capitalize;
+  }
+</style>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
     <img src="{% static 'images/demo.png'%}" alt="">
@@ -24,4 +33,7 @@
       </ul>
     </div>
   </div>
+
+  <span id="hello-msg">Hello,{{request.user}}</span>
+  <span ><a id="hello-msg" href="{% url 'logout'%}">Logout</a></span>
 </nav>
